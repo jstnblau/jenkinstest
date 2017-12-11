@@ -12,6 +12,7 @@ properties([
 ])
 
 def defaultPBuild(buildParams=[],dockerParams=[]) {
+	node('master'){
    	  stage('test'){
           sh """ echo \
             'docker run --rm \
@@ -28,5 +29,5 @@ def defaultPBuild(buildParams=[],dockerParams=[]) {
           """
       }
 }
-
+}
 defaultPBuild()
