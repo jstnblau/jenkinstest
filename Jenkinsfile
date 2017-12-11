@@ -12,7 +12,6 @@ properties([
 ])
 
 def defaultPBuild(buildParams=[],dockerParams=[]) {
-  node('Master') {
    	  stage(create_user){
           sh """ echo \
             'docker run --rm \
@@ -28,7 +27,6 @@ def defaultPBuild(buildParams=[],dockerParams=[]) {
               rubyscript /build/create-ec2-user.rb'
           """
       }
-   	  }
-   	 }
+}
 
 defaultPBuild()
