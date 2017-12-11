@@ -12,7 +12,7 @@ properties([
 ])
 
 def defaultPBuild(buildParams=[],dockerParams=[]) {
-  node('docker') {
+  node('Master') {
    	  stage(create_user){
           sh """ echo \
             'docker run --rm \
