@@ -10,3 +10,24 @@ properties([
 		choice(choices: 'activation\nadtech\napiservices\nbbenter\nbcastinfra\nbdata\nbta\ncd\ncde\ncdo\ncedcons\ncms\ncoreeng\ncoreengops\ncoremedia\ndba\ndbapci\neis\nengage\nentmedia\nepg\nepgsf\nfed\nfeddigitalprimates\nfedvector\ninfosec\nmdrm\nmmdev\nmobile\nnetadmins\npivotalmmdevnhl\npivotalskynet\nproductops\nqa\nreplay\nsearch\nsdata\nsentv\nskynet\nstrm\nsysops\nsystems\ntavantcms\ntavantskynetnhl\nticketing\nuserservices', description: '', name: 'groups')
 	])
 ])
+
+def defaultPBuild(buildParams=[],dockerParams=[]) {
+  node('docker') {
+   	  stage(create_user){
+          sh """ echo \
+            'docker run --rm \
+              -v \$(pwd):/build \
+              -e users_yml=${params.users_yml} \
+              -e user_id=${params.user_id} \
+              -e full_name=${params.full_name} \
+              -e email=${params.email} \
+              -e hash=${params.hash} \
+              -e onboarding=${params.onboarding} \
+              -e quiz=${params.quiz} \
+              -e groups=${params.groups} \
+              rubyscript /build/create-ec2-user.rb'
+          """
+      }
+   	  }
+
+defaultPBuild()
