@@ -12,7 +12,7 @@ properties([
 ])
 
 def defaultPBuild(buildParams=[],dockerParams=[]) {
-   	  stage(test){
+   	  stage('test'){
           sh """ echo \
             'docker run --rm \
               -v \$(pwd):/build \
